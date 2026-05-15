@@ -45,7 +45,6 @@ export const Navbar = () => {
     { name: 'Service Areas', href: '/service-areas' },
     { name: 'About', href: '/about' },
     { name: 'FAQ', href: '/faq' },
-    { name: 'Contact', href: '/contact' },
   ];
 
   const showTransparent = isHomePage && !isScrolled;
