@@ -11,8 +11,41 @@ export const ContactPage = () => {
     message: ''
   });
 
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [field]: e.target.value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSending(true);
+
+    try {
+      const formPayload = new FormData();
+      formPayload.append('firstName', formData.firstName);
+      formPayload.append('lastName', formData.lastName);
+      formPayload.append('email', formData.email);
+      formPayload.append('message', formData.message);
+
+      const response = await fetch('/submit-contact.php', {
+        method: 'POST',
+        body: formPayload
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        alert('Failed to send message. Please email us directly at booking@luxmotionrides.com.');
+      }
+    } catch {
+      alert('Network error. Please email us directly at booking@luxmotionrides.com.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -65,17 +98,27 @@ export const ContactPage = () => {
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <input type="text" placeholder="First Name" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#FA0000]" />
-              <input type="text" placeholder="Last Name" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#FA0000]" />
+          {submitted ? (
+            <div className="max-w-2xl mx-auto text-center py-12">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h2>
+              <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
             </div>
-            <input type="email" placeholder="Email" className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:border-[#FA0000]" />
-            <textarea placeholder="Message" rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:border-[#FA0000]"></textarea>
-            <button type="submit" className="w-full bg-[#FA0000] text-white py-4 rounded-lg font-semibold hover:bg-[#FF3333] transition-colors">
-              Send Message
-            </button>
-          </form>
+          ) : (
+            <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <input type="text" placeholder="First Name" value={formData.firstName} onChange={handleChange('firstName')} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#FA0000]" />
+                <input type="text" placeholder="Last Name" value={formData.lastName} onChange={handleChange('lastName')} required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#FA0000]" />
+              </div>
+              <input type="email" placeholder="Email" value={formData.email} onChange={handleChange('email')} required className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:border-[#FA0000]" />
+              <textarea placeholder="Message" rows={5} value={formData.message} onChange={handleChange('message')} required className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:border-[#FA0000]"></textarea>
+              <button type="submit" disabled={sending} className="w-full bg-[#FA0000] text-white py-4 rounded-lg font-semibold hover:bg-[#FF3333] transition-colors disabled:opacity-50">
+                {sending ? 'Sending...' : 'Send Message'}
+              </button>
+            </form>
+          )}
         </div>
       </section>
     </div>
