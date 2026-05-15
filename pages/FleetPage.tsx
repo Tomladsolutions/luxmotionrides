@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export const FleetPage = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-20">
       <SEO
         title="Luxury Fleet | Denver Black Car Service | Lux Motion Rides"
         description="Browse Lux Motion Rides premium fleet of luxury black SUVs and vans. GMC Yukon Denali, Chevrolet Suburban, Ford Transit, and Mercedes Sprinter available for Denver airport transfers and Colorado travel."

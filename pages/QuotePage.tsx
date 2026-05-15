@@ -8,7 +8,7 @@ export const QuotePage = () => {
   const { openBooking } = useBooking();
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden pt-20">
       <SEO
         title="Get a Quote | Denver Luxury Car Service Pricing | Lux Motion Rides"
         description="Request a quote for Lux Motion Rides luxury transportation in Colorado. Get pricing for airport transfers to DIA, corporate travel, mountain transportation, and special events across Denver and beyond."

@@ -18,7 +18,7 @@ export const ServicesPage = () => {
   const { openBooking } = useBooking();
 
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-20">
       <SEO
         title="Luxury Transportation Services | Denver & Colorado"
         description="Explore Lux Motion Rides premium transportation services: airport transfers to DIA, corporate travel, mountain transportation to Vail and Aspen, special event rides, and private car service across Colorado."
