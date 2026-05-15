@@ -14,7 +14,7 @@ export const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-24">
       {/* Video Background */}
       <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
         <video
