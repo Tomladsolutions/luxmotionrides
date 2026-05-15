@@ -8,7 +8,7 @@ import { useBooking } from '../context/BookingContext';
 export const AboutPage = () => {
   const { openBooking } = useBooking();
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-20">
       <SEO
         title="About Lux Motion Rides | Denver Luxury Car Service"
         description="Learn about Lux Motion Rides, Colorado trusted luxury black car service. Professional chauffeurs, premium fleet, and commitment to on-time service across Denver, Boulder, and Colorado Springs."

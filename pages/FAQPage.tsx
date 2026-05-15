@@ -50,7 +50,7 @@ export const FAQPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden pt-20">
       <SEO
         title="FAQ | Denver Luxury Car Service | Lux Motion Rides"
         description="Frequently asked questions about Lux Motion Rides luxury car service in Colorado. Learn about booking, pricing, service areas, fleet, cancellations, and more for Denver, Boulder, and mountain transportation."

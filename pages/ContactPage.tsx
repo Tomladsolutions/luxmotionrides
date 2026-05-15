@@ -49,7 +49,7 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-20">
       <SEO
         title="Contact Lux Motion Rides | Denver Luxury Car Service"
         description="Contact Lux Motion Rides for luxury transportation in Colorado. Call +1 720-935-1912, email booking@luxmotionrides.com, or book online for airport transfers, corporate travel, and mountain rides."
