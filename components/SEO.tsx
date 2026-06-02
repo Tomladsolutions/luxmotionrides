@@ -14,7 +14,7 @@ export const SEO = ({ title, description, keywords, ogTitle, ogDescription, cano
   const siteName = 'Lux Motion Rides';
   const fullTitle = `${title} | Lux Motion Rides`;
   const defaultDescription = 'Colorado premier luxury black car service for airport transfers, corporate travel, mountain transportation, and special events.';
-  const siteUrl = 'https://luxmotionride.com';
+  const siteUrl = 'https://luxmotionrides.com';
 
   return (
     <Helmet>
