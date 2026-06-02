@@ -7,6 +7,10 @@ import { MapPin, Phone, Mail, Calculator, Clock, Car, Users } from 'lucide-react
 export const QuotePage = () => {
   const { openBooking } = useBooking();
 
+  const handleGetQuote = () => {
+    openBooking({ bookingType: 'quote' });
+  };
+
   return (
     <div className="min-h-screen bg-white relative overflow-hidden pt-20">
       <SEO
