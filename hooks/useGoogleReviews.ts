@@ -14,7 +14,6 @@ interface PlaceSearchResult {
 }
 
 const BUSINESS_NAME = 'Lux Motion Rides';
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCQe3WlF89L5O4gh2Ps-yW_XIlo9dAgNRQ';
 
 export const useGoogleReviews = () => {
   const [reviews, setReviews] = useState<GoogleReview[]>([]);
@@ -26,9 +25,16 @@ export const useGoogleReviews = () => {
       setLoading(true);
       setError(null);
 
+      const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+      if (!apiKey) {
+        setError('Google API key not configured');
+        setLoading(false);
+        return;
+      }
+
       try {
         // First, search for the business
-        const searchUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(BUSINESS_NAME)}&key=${GOOGLE_MAPS_API_KEY}`;
+        const searchUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(BUSINESS_NAME)}&key=${apiKey}`;
         const searchResponse = await fetch(searchUrl);
         const searchData = await searchResponse.json();
 
@@ -41,7 +47,7 @@ export const useGoogleReviews = () => {
         const placeId = searchData.results[0].place_id;
 
         // Then get reviews using Place Details
-        const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${GOOGLE_MAPS_API_KEY}`;
+        const detailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`;
         const detailsResponse = await fetch(detailsUrl);
         const detailsData: PlaceSearchResult = await detailsResponse.json();
 

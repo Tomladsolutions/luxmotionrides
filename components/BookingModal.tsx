@@ -39,39 +39,6 @@ const mockFlights: FlightInfo[] = [
   { flightNumber: 'SW 234', airline: 'Southwest', status: 'arrived', scheduledTime: '13:55', gate: 'B45', terminal: 'B' },
 ];
 
-const airports = [
-  { code: 'DIA', name: 'Denver International Airport', city: 'Denver' },
-  { code: 'APA', name: 'Centennial Airport', city: 'Denver' },
-  { code: 'BJC', name: 'Rocky Mountain Metropolitan Airport', city: 'Broomfield' },
-  { code: 'COS', name: 'Colorado Springs Airport', city: 'Colorado Springs' },
-  { code: 'ASE', name: 'Aspen-Pitkin County Airport', city: 'Aspen' },
-  { code: 'EGE', name: 'Eagle County Regional Airport', city: 'Eagle' },
-  { code: 'GUC', name: 'Gunnison-Crested Butte Regional Airport', city: 'Gunnison' },
-  { code: 'MTJ', name: 'Montrose Regional Airport', city: 'Montrose' },
-  { code: 'DEN', name: 'Denver International Airport', city: 'Denver' },
-];
-
-const serviceAreas = [
-  'Denver Downtown',
-  'Boulder',
-  'Aurora',
-  'Lakewood',
-  'Littleton',
-  'Centennial',
-  'Colorado Springs',
-  'Vail',
-  'Aspen',
-  'Keystone',
-  'Breckenridge'
-];
-
-const vehicles = [
-  { id: 'gmc', name: 'GMC Yukon XL Denali', seats: '1-6', price: 'From $150' },
-  { id: 'suburban', name: 'Chevrolet Suburban XL', seats: '1-7', price: 'From $140' },
-  { id: 'transit', name: 'Ford Transit (10 Seater)', seats: '1-10', price: 'From $200' },
-  { id: 'sprinter', name: 'Mercedes Sprinter (14 Seater)', seats: '1-14', price: 'From $280' },
-];
-
 export const BookingModal = () => {
   const { isOpen, closeBooking, bookingData, updateBookingData, currentStep, setCurrentStep } = useBooking();
   const [isBooked, setIsBooked] = useState(false);
@@ -146,15 +113,17 @@ export const BookingModal = () => {
     setIsBooked(true);
   };
 
-  const canProceed = () => {
+  const canProceed = (): boolean => {
     switch (currentStep) {
       case 1:
         if (!selectedService) return false;
-        return bookingData.bookingType && bookingData.serviceType;
+        return Boolean(bookingData.bookingType && bookingData.serviceType);
       case 2:
-        return bookingData.firstName && bookingData.lastName && bookingData.email && 
-               bookingData.phone && bookingData.pickupLocation && bookingData.dropoffLocation &&
-               bookingData.pickupDate && bookingData.pickupTime;
+        return Boolean(
+          bookingData.firstName && bookingData.lastName && bookingData.email &&
+          bookingData.phone && bookingData.pickupLocation && bookingData.dropoffLocation &&
+          bookingData.pickupDate && bookingData.pickupTime
+        );
       case 3:
         return true;
       default:

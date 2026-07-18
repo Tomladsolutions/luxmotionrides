@@ -12,12 +12,13 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    unstubEnvs: true,
     setupFiles: ['./vitest.setup.ts'],
     include: ['**/*.{test,spec}.{ts,tsx}'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['hooks/**', 'context/**'],
+      include: ['hooks/**', 'context/**', 'components/**', 'pages/**'],
     },
   },
 });
