@@ -64,6 +64,11 @@ export const useFlightTracking = (): UseFlightTrackingReturn => {
 
       const data = await response.json();
 
+      // aviationstack returns HTTP 200 with an error object for issues like an invalid key
+      if (data.error) {
+        throw new Error(data.error.message || 'Flight API request failed');
+      }
+
       if (data.data && data.data.length > 0) {
         const flight = data.data[0];
         setFlightData({
@@ -95,6 +100,7 @@ export const useFlightTracking = (): UseFlightTrackingReturn => {
         setFlightData(null);
       }
     } catch (err) {
+      console.error('Flight tracking failed:', err);
       setError('Failed to track flight. Please try again.');
       setFlightData(null);
     } finally {
