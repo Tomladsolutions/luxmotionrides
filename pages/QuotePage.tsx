@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SEO } from '../components/SEO';
+import { PageHero } from '../components/PageHero';
 import { useBooking } from '../context/BookingContext';
+import { SITE } from '../constants/site';
 import { MapPin, Phone, Mail, Calculator, Clock, Car, Users } from 'lucide-react';
 
 export const QuotePage = () => {
@@ -19,31 +21,17 @@ export const QuotePage = () => {
         keywords="Denver car service quote, Colorado luxury transportation pricing, airport transfer cost Denver, DIA car service rates, mountain transportation price Colorado"
         canonical="/quote"
       />
-      {/* Hero Section */}
-      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop" 
-            alt="Get a Quote" 
-            className="w-full h-full object-cover opacity-40"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-6 mt-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Get a Quote</h1>
-            <p className="text-xl text-white max-w-2xl mx-auto font-light">
-              Request pricing information for your upcoming ride. We'll provide you with a detailed quote tailored to your needs.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+      <PageHero
+        image="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=2070&auto=format&fit=crop"
+        imageAlt="Get a Quote"
+        title="Get a Quote"
+        subtitle="Request pricing information for your upcoming ride. We'll provide you with a detailed quote tailored to your needs."
+        imageClassName="w-full h-full object-cover opacity-40"
+        overlayClassName="bg-gradient-to-b from-black/80 via-black/40 to-black"
+        contentClassName="relative z-10 text-center px-6 mt-20"
+        titleClassName="font-serif text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
+        subtitleClassName="text-xl text-white max-w-2xl mx-auto font-light"
+      />
 
       <div className="absolute inset-0 bg-grid-white/[0.02] z-0 pointer-events-none mt-[50vh]"></div>
       
@@ -110,7 +98,7 @@ export const QuotePage = () => {
               <div>
                 <h3 className="text-xl font-semibold text-black mb-2">Phone Quote</h3>
                 <p className="text-gray-400 mb-1">Speak with our team</p>
-                <a href="tel:+17209351912" className="text-2xl font-light text-black hover:text-burgundy transition-colors">+1 (720) 935-1912</a>
+                <a href={SITE.phoneHref} className="text-2xl font-light text-black hover:text-burgundy transition-colors">{SITE.phoneDisplay}</a>
               </div>
             </div>
 
@@ -121,7 +109,7 @@ export const QuotePage = () => {
               <div>
                 <h3 className="text-xl font-semibold text-black mb-2">Email Quote</h3>
                 <p className="text-gray-400 mb-1">Request via email</p>
-                <a href="mailto:booking@luxmotionrides.com" className="text-2xl font-light text-black hover:text-burgundy transition-colors">booking@luxmotionrides.com</a>
+                <a href={SITE.emailHref} className="text-2xl font-light text-black hover:text-burgundy transition-colors">{SITE.email}</a>
               </div>
             </div>
 

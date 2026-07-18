@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { GOOGLE_MAPS_API_KEY } from '../constants/site';
 
 interface GoogleReview {
   author_name: string;
@@ -14,7 +15,6 @@ interface PlaceSearchResult {
 }
 
 const BUSINESS_NAME = 'Lux Motion Rides';
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCQe3WlF89L5O4gh2Ps-yW_XIlo9dAgNRQ';
 
 export const useGoogleReviews = () => {
   const [reviews, setReviews] = useState<GoogleReview[]>([]);

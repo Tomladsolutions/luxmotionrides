@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { PageHero } from '../components/PageHero';
+import { useScrollToTop } from '../hooks/useScrollToTop';
 
 const faqs = [
   {
@@ -45,9 +47,7 @@ const faqs = [
 export const FAQPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTop();
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden pt-20">
@@ -57,30 +57,16 @@ export const FAQPage = () => {
         keywords="Denver car service FAQ, Colorado luxury transportation questions, airport transfer Denver FAQ, booking luxury ride Denver"
         canonical="/faq"
       />
-      {/* Hero Section */}
-      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/gmc.png" 
-            alt="Luxury car" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-black/70"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-6 mt-20">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="text-[#FA0000] uppercase tracking-[0.2em] font-semibold text-xs mb-4 block">Help Center</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h1>
-            <p className="text-gray-200 text-lg">Everything you need to know about Lux Motion Rides.</p>
-          </motion.div>
-        </div>
-      </div>
+      <PageHero
+        image="/gmc.png"
+        imageAlt="Luxury car"
+        eyebrow="Help Center"
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about Lux Motion Rides."
+        overlayClassName="bg-black/70"
+        contentClassName="relative z-10 text-center px-6 mt-20"
+        titleClassName="text-4xl md:text-5xl font-bold text-white mb-4"
+      />
 
       <div className="absolute inset-0 bg-grid-white/[0.02] z-0 pointer-events-none mt-[50vh]"></div>
       

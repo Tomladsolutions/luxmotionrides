@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useBooking } from '../context/BookingContext';
+import { SITE } from '../constants/site';
 
 export const Footer = () => {
   const { openBooking } = useBooking();
@@ -79,7 +80,7 @@ export const Footer = () => {
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs">Call Us 24/7</p>
-                  <a href="tel:+17209351912" className="text-gray-700 font-medium hover:text-[#FA0000]">+1 720-935-1912</a>
+                  <a href={SITE.phoneHref} className="text-gray-700 font-medium hover:text-[#FA0000]">+1 720-935-1912</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -88,7 +89,7 @@ export const Footer = () => {
                 </div>
                 <div>
                   <p className="text-gray-400 text-xs">Email Us</p>
-                  <a href="mailto:booking@luxmotionrides.com" className="text-gray-700 font-medium hover:text-[#FA0000]">booking@luxmotionrides.com</a>
+                  <a href={SITE.emailHref} className="text-gray-700 font-medium hover:text-[#FA0000]">{SITE.email}</a>
                 </div>
               </li>
               <li className="flex items-start gap-3">
