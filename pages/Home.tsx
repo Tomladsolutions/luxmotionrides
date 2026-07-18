@@ -7,6 +7,7 @@ import { HowBookingWorks } from '../components/HowBookingWorks';
 import { Reviews } from '../components/Reviews';
 import { SEO } from '../components/SEO';
 import { useBooking } from '../context/BookingContext';
+import { SITE } from '../constants/site';
 import { motion } from 'framer-motion';
 
 export const Home = () => {
@@ -97,7 +98,7 @@ export const Home = () => {
               <button onClick={openBooking} className="bg-[#FA0000] text-white px-10 py-4 rounded-full font-semibold text-sm hover:bg-[#FF3333] transition-colors">
                 Book a Ride
               </button>
-              <a href="tel:+17209351912" className="border-2 border-gray-900 text-gray-900 px-10 py-4 rounded-full font-semibold text-sm hover:bg-gray-900 hover:text-white transition-colors">
+              <a href={SITE.phoneHref} className="border-2 border-gray-900 text-gray-900 px-10 py-4 rounded-full font-semibold text-sm hover:bg-gray-900 hover:text-white transition-colors">
                 Call Now
               </a>
             </div>

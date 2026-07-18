@@ -3,6 +3,7 @@ import { Plane, Briefcase, CalendarCheck, Users, Mountain, Music } from 'lucide-
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { SEO } from '../components/SEO';
+import { PageHero } from '../components/PageHero';
 import { useBooking } from '../context/BookingContext';
 
 const services = [
@@ -25,21 +26,18 @@ export const ServicesPage = () => {
         keywords="Colorado transportation services, Denver car service, airport transfer DIA, corporate travel Denver, mountain transportation Colorado, luxury rides Denver"
         canonical="/services"
       />
-      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?w=2000" alt="Services" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <span className="text-[#FA0000] uppercase text-xs font-semibold tracking-widest">What We Offer</span>
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mt-4">Our Services</h1>
-            <p className="text-gray-200 mt-4 max-w-xl mx-auto">Professional transportation services tailored to your needs.</p>
-            <div className="w-24 h-1 bg-[#FA0000] mx-auto mt-6"></div>
-          </motion.div>
-        </div>
-      </div>
+      <PageHero
+        image="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?w=2000"
+        imageAlt="Services"
+        eyebrow="What We Offer"
+        title="Our Services"
+        subtitle="Professional transportation services tailored to your needs."
+        showDivider
+        eyebrowClassName="text-[#FA0000] uppercase text-xs font-semibold tracking-widest"
+        titleClassName="font-serif text-5xl md:text-7xl font-bold text-white mt-4"
+        subtitleClassName="text-gray-200 mt-4 max-w-xl mx-auto"
+        dividerClassName="w-24 h-1 bg-[#FA0000] mx-auto mt-6"
+      />
 
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
