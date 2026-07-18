@@ -17,7 +17,7 @@ interface AutocompleteService {
   } | null>;
 }
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCQe3WlF89L5O4gh2Ps-yW_XIlo9dAgNRQ';
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 export const useGooglePlacesAutocomplete = (
   onAddressSelect?: (address: string) => void
@@ -30,6 +30,11 @@ export const useGooglePlacesAutocomplete = (
   useEffect(() => {
     if (window.google) {
       setIsLoaded(true);
+      return;
+    }
+
+    if (!GOOGLE_MAPS_API_KEY) {
+      setError('Google Maps is not configured');
       return;
     }
 
