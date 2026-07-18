@@ -19,7 +19,18 @@ describe('useGoogleReviews', () => {
   beforeEach(() => {
     mockFetch.mockReset();
     vi.stubGlobal('fetch', mockFetch);
+    vi.stubEnv('VITE_GOOGLE_MAPS_API_KEY', 'test-key');
     vi.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  it('sets an error when the API key is not configured', async () => {
+    vi.stubEnv('VITE_GOOGLE_MAPS_API_KEY', '');
+
+    const { result } = renderHook(() => useGoogleReviews());
+
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    expect(result.current.error).toBe('Google API key not configured');
+    expect(mockFetch).not.toHaveBeenCalled();
   });
 
   it('fetches the place and then its reviews on mount', async () => {

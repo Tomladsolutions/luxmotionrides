@@ -2,17 +2,30 @@ import React from 'react';
 import { Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useGoogleReviews } from '../hooks/useGoogleReviews';
-import { useBooking } from '../context/BookingContext';
 
-const fallbackReviews = [
+interface DisplayReview {
+  quote: string;
+  name: string;
+  designation: string;
+}
+
+const fallbackReviews: DisplayReview[] = [
   { quote: "Excellent service! The driver was punctual, professional, and the vehicle was immaculate.", name: "Sarah M.", designation: "⭐⭐⭐⭐⭐" },
   { quote: "Lux Motion Rides made our group trip so much easier. Great communication and fantastic drivers.", name: "Michael R.", designation: "⭐⭐⭐⭐⭐" },
   { quote: "Best luxury car service in Denver. Professional, reliable, and the prices are very competitive.", name: "Jennifer L.", designation: "⭐⭐⭐⭐⭐" },
 ];
 
 export const Reviews = () => {
-  const { openBooking } = useBooking();
-  const reviews = fallbackReviews;
+  const { reviews: googleReviews } = useGoogleReviews();
+
+  const reviews: DisplayReview[] =
+    googleReviews.length > 0
+      ? googleReviews.map((review) => ({
+          quote: review.text,
+          name: review.author_name,
+          designation: review.relative_time_description,
+        }))
+      : fallbackReviews;
 
   return (
     <section className="py-20 bg-gray-50">
