@@ -76,6 +76,7 @@ export const BookingModal = () => {
   const { isOpen, closeBooking, bookingData, updateBookingData, currentStep, setCurrentStep } = useBooking();
   const [isBooked, setIsBooked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [showEvents, setShowEvents] = useState(false);
   const [showFlights, setShowFlights] = useState(false);
   const [selectedService, setSelectedService] = useState(false);
@@ -95,6 +96,7 @@ export const BookingModal = () => {
     if (!isOpen) {
       setSelectedService(false);
       setAgreedToTerms(false);
+      setSubmitError(null);
     } else if (bookingData.serviceType) {
       setSelectedService(true);
     }
@@ -109,7 +111,8 @@ export const BookingModal = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+    setSubmitError(null);
+
     const formData = new FormData();
     formData.append('firstName', bookingData.firstName);
     formData.append('lastName', bookingData.lastName);
@@ -131,19 +134,26 @@ export const BookingModal = () => {
         method: 'POST',
         body: formData
       });
-      
-      const result = await response.json();
-      
-      if (!result.success) {
-        console.error('Booking error:', result.message);
+
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
       }
+
+      const result = await response.json();
+
+      if (!result.success) {
+        throw new Error(result.message || 'Your request could not be submitted.');
+      }
+
+      setIsBooked(true);
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('Booking submission failed:', error);
+      setSubmitError(
+        'We could not submit your request. Please try again or call us at +1 (720) 935-1912.'
+      );
+    } finally {
+      setIsLoading(false);
     }
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsLoading(false);
-    setIsBooked(true);
   };
 
   const canProceed = () => {
@@ -952,6 +962,13 @@ export const BookingModal = () => {
                   </span>
                 </label>
               </div>
+
+              {submitError && (
+                <div className="mb-4 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-left flex items-start gap-2">
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                  <p className="text-red-600 text-sm">{submitError}</p>
+                </div>
+              )}
 
               <button 
                 type="submit"
