@@ -14,7 +14,7 @@ interface PlaceSearchResult {
 }
 
 const BUSINESS_NAME = 'Lux Motion Rides';
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCQe3WlF89L5O4gh2Ps-yW_XIlo9dAgNRQ';
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 export const useGoogleReviews = () => {
   const [reviews, setReviews] = useState<GoogleReview[]>([]);
@@ -25,6 +25,12 @@ export const useGoogleReviews = () => {
     const fetchReviews = async () => {
       setLoading(true);
       setError(null);
+
+      if (!GOOGLE_MAPS_API_KEY) {
+        setError('Google Maps is not configured');
+        setLoading(false);
+        return;
+      }
 
       try {
         // First, search for the business
