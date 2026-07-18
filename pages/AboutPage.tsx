@@ -2,8 +2,9 @@ import React from 'react';
 import { About } from '../components/About';
 import { WhyChooseUs } from '../components/WhyChooseUs';
 import { SEO } from '../components/SEO';
-import { motion } from 'framer-motion';
+import { PageHero } from '../components/PageHero';
 import { useBooking } from '../context/BookingContext';
+import { SITE } from '../constants/site';
 
 export const AboutPage = () => {
   const { openBooking } = useBooking();
@@ -15,29 +16,12 @@ export const AboutPage = () => {
         keywords="about Lux Motion Rides, Denver car service company, Colorado chauffeur service, luxury transportation Denver"
         canonical="/about"
       />
-      {/* Hero Section */}
-      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/gmc.png" 
-            alt="Luxury black car" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-6">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-6">About Lux Motion Rides</h1>
-            <div className="w-24 h-1 bg-[#FA0000] mx-auto rounded-full"></div>
-          </motion.div>
-        </div>
-      </div>
+      <PageHero
+        image="/gmc.png"
+        imageAlt="Luxury black car"
+        title="About Lux Motion Rides"
+        showDivider
+      />
 
       <About />
       <WhyChooseUs />
@@ -52,7 +36,7 @@ export const AboutPage = () => {
             <button onClick={openBooking} className="bg-[#FA0000] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#FF3333] transition-colors">
               Book a Ride
             </button>
-            <a href="tel:+17209351912" className="border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-900 hover:text-white transition-colors">
+            <a href={SITE.phoneHref} className="border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-900 hover:text-white transition-colors">
               Call Now
             </a>
           </div>

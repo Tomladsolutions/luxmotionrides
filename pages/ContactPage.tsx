@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { SEO } from '../components/SEO';
+import { PageHero } from '../components/PageHero';
+import { SITE } from '../constants/site';
 
 export const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -39,10 +40,10 @@ export const ContactPage = () => {
       if (result.success) {
         setSubmitted(true);
       } else {
-        alert('Failed to send message. Please email us directly at booking@luxmotionrides.com.');
+        alert(`Failed to send message. Please email us directly at ${SITE.email}.`);
       }
     } catch {
-      alert('Network error. Please email us directly at booking@luxmotionrides.com.');
+      alert(`Network error. Please email us directly at ${SITE.email}.`);
     } finally {
       setSending(false);
     }
@@ -56,25 +57,12 @@ export const ContactPage = () => {
         keywords="contact luxury car service Denver, Denver black car phone number, book limo Denver, Colorado transportation booking"
         canonical="/contact"
       />
-      {/* Hero */}
-      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=2000" 
-            alt="Contact" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-        
-        <div className="relative z-10 text-center px-6">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-6">Contact Us</h1>
-            <div className="w-24 h-1 bg-[#FA0000] mx-auto rounded-full"></div>
-          </motion.div>
-        </div>
-      </div>
+      <PageHero
+        image="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=2000"
+        imageAlt="Contact"
+        title="Contact Us"
+        showDivider
+      />
 
       {/* Contact Info */}
       <section className="py-20">
@@ -83,12 +71,12 @@ export const ContactPage = () => {
             <div className="text-center">
               <Phone className="w-8 h-8 text-[#FA0000] mx-auto mb-4" />
               <h3 className="font-semibold text-gray-900 mb-2">Phone</h3>
-              <a href="tel:+17209351912" className="text-gray-600 hover:text-[#FA0000]">+1 (720) 935-1912</a>
+              <a href={SITE.phoneHref} className="text-gray-600 hover:text-[#FA0000]">{SITE.phoneDisplay}</a>
             </div>
             <div className="text-center">
               <Mail className="w-8 h-8 text-[#FA0000] mx-auto mb-4" />
               <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-              <a href="mailto:booking@luxmotionrides.com" className="text-gray-600 hover:text-[#FA0000]">booking@luxmotionrides.com</a>
+              <a href={SITE.emailHref} className="text-gray-600 hover:text-[#FA0000]">{SITE.email}</a>
             </div>
             <div className="text-center">
               <MapPin className="w-8 h-8 text-[#FA0000] mx-auto mb-4" />
