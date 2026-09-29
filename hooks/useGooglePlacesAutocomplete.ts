@@ -75,6 +75,7 @@ export const useGooglePlacesAutocomplete = (
         setSuggestions([]);
       }
     } catch (err) {
+      console.error('Failed to fetch address suggestions:', err);
       setError('Failed to fetch suggestions');
       setSuggestions([]);
     } finally {
