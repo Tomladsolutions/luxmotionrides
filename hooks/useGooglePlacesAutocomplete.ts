@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
+import { GOOGLE_MAPS_API_KEY } from '../constants/site';
 
 interface PlaceSuggestion {
   display_name: string;
@@ -16,8 +17,6 @@ interface AutocompleteService {
     predictions: Array<{ description: string; place_id: string }>;
   } | null>;
 }
-
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCQe3WlF89L5O4gh2Ps-yW_XIlo9dAgNRQ';
 
 export const useGooglePlacesAutocomplete = (
   onAddressSelect?: (address: string) => void

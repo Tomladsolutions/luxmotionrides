@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useBooking } from '../context/BookingContext';
+import { useScrollToTop } from '../hooks/useScrollToTop';
 import { CheckCircle } from 'lucide-react';
 
 interface ServiceTemplateProps {
@@ -23,9 +24,7 @@ export const ServiceTemplate: React.FC<ServiceTemplateProps> = ({ title, subtitl
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  useScrollToTop();
 
   return (
     <div className="pt-32 pb-20 min-h-screen bg-white relative overflow-hidden">
